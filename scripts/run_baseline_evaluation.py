@@ -36,15 +36,16 @@ def main(config_path: str, checkpoint_name: str, local: bool = False) -> None:
     """
     device = "cuda" if torch.cuda.is_available() else "cpu"
     config = load_config(config_path)
+
+    data_root=Path(config["paths"]["doppler_traces_dir"])
+    output_root=Path(config["paths"]["output_dir"])
+    
     model=SHARPClassifier(
         n_classes=len(TARGET_CLASSES),
         nw=config["doppler"]["stacked_vectors_nw"],
         nd=config["doppler"]["velocity_bins_nd"],
     ).to(device)
-    model = load_checkpoint_to_model(config, model, checkpoint_name, device, logger, local=local)
-
-    data_root=Path(config["paths"]["doppler_traces_dir"])
-    output_root=Path(config["paths"]["output_dir"])
+    model = load_checkpoint_to_model(config, model, checkpoint_name, output_root, device, logger, local=local)
 
     accuracy_by_set: dict[str, float] = {}
     accuracy_by_set_pa: dict[str, dict[str, float]] = {}

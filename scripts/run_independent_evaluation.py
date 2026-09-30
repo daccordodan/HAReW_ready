@@ -55,7 +55,7 @@ def main(config_path: str, local: bool = False) -> None:
     
         checkpoint_name=f"sharp_best_antenna_{i}.pt"
         models[i] = load_checkpoint_to_model(
-            config, models[i], checkpoint_name, device, logger, local=local
+            config, models[i], checkpoint_name, output_root, device, logger, local=local
         )
 
     accuracy_by_set: dict[str, float] = {}

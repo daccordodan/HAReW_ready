@@ -19,7 +19,8 @@ from huggingface_hub import hf_hub_download
 def load_checkpoint_to_model(
     config: dict, 
     model: torch.nn.Module, 
-    checkpoint_name: str, 
+    checkpoint_name: str,
+    checkpoint_folder: str, 
     device: str, 
     logger: logging.Logger, 
     local: bool = False
@@ -30,7 +31,8 @@ def load_checkpoint_to_model(
     Args:
         config: configuration parameter dictionary
         model: neural network model instance
-        checkpoint_name: checkpoint file path or identifier name
+        checkpoint_name: checkpoint identifier name
+        checkpoint_folder: checkpoint folder path
         device: "cuda" or "cpu"
         logger: logger instance for output messages
         local: flag to load from local directory
@@ -41,7 +43,7 @@ def load_checkpoint_to_model(
     if local:
         checkpoint_path = Path(checkpoint_name)
         if not checkpoint_path.is_absolute() and not checkpoint_path.exists():
-            checkpoint_path = Path(config["paths"]["output_dir"]) / "checkpoints" / checkpoint_path
+            checkpoint_path = Path(checkpoint_folder) / "checkpoints" / checkpoint_path
         if not checkpoint_path.exists():
             raise FileNotFoundError(f"Local checkpoint not found: {checkpoint_path}")
         checkpoint = torch.load(checkpoint_path, map_location=device)
