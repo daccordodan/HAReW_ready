@@ -72,7 +72,6 @@ def plot_acc_f1_results_pa(accuracy: dict[str, dict[str, float]], fscore: dict[s
 
     df_combined = "Acc: " + df_acc.round(2).astype(str) + "\nF1: " + df_f1.round(2).astype(str)
     _, ax = plt.subplots(figsize=(6, 2.5))
-    ax.set_title('Accuracy and F1-scores of the baseline')
     ax.axis('tight')
     ax.axis('off')
 
