@@ -1,0 +1,18 @@
+# Core (PyTorch-based, per project constraint #1)
+torch>=2.2
+numpy>=2.0
+
+# Data handling
+PyYAML>=6.0
+
+# Metrics / analysis
+matplotlib>=3.8
+
+# Dev tooling
+tqdm>=4.66
+
+# Notebooks
+jupyter>=1.0
+
+# Hugging Face
+huggingface_hub

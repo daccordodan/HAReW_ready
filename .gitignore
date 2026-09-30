@@ -1,0 +1,7 @@
+docs/
+.venv/
+data/doppler_traces/
+outputs/baseline/*
+
+__pycache__/
+notes/
